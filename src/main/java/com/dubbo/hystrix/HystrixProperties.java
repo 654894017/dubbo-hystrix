@@ -2,14 +2,13 @@ package com.dubbo.hystrix;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 /**
  * @see "https://github.com/Netflix/Hystrix/wiki/Configuration"
  * @see "http://www.jianshu.com/p/39763a0bd9b8"
  */
 @Data
-@ConfigurationProperties(prefix = "pandora.hystrix")
+@ConfigurationProperties(prefix = "pandora.hystrix.global")
 public class HystrixProperties {
     /* null means it hasn't been overridden */
     private Boolean circuitBreakerEnabled;

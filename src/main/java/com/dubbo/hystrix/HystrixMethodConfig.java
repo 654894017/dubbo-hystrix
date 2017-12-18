@@ -1,21 +1,19 @@
 package com.dubbo.hystrix;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import lombok.Data;
 
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface HystrixMethodConfig {
-    String groupKey() default "default";
+/**
+ * hystrix 方法配置
+ *
+ * @author liujiawei
+ * @create 2017-12-18 下午1:52
+ */
+@Data
+public class HystrixMethodConfig {
+    private String groupKey;
 
-    String commandKey() default "default";
+    private String commandKey;
 
-    String fallbackClass() default "";
-
-    DubboHystrixThreadPoolProperties threadPoolProperties();
+    private String fallbackClass;
 
 }

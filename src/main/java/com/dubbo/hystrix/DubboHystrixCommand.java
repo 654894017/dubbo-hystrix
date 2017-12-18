@@ -34,18 +34,18 @@ public class DubboHystrixCommand extends HystrixCommand<Result> {
     private Invoker<?> invoker;
     private Invocation invocation;
     private Method method;
-    private HystrixMethodConfig hystrixConfig;
+    private String fallbackClass;
     @Getter
     private RpcContext rpcContext;
 
-    DubboHystrixCommand(Invoker invoker, Invocation invocation, Method method, HystrixCommandProperties.Setter commandProperties, HystrixThreadPoolProperties.Setter threadPoolProperties, HystrixMethodConfig hystrixConfig) {
-        super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(hystrixConfig.groupKey()))
-                .andCommandKey(HystrixCommandKey.Factory.asKey(hystrixConfig.commandKey()))
+    DubboHystrixCommand(Invoker invoker, Invocation invocation, Method method, HystrixCommandProperties.Setter commandProperties, HystrixThreadPoolProperties.Setter threadPoolProperties, HystrixMethodConfig config) {
+        super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(config.getGroupKey()))
+                .andCommandKey(HystrixCommandKey.Factory.asKey(config.getCommandKey()))
                 .andCommandPropertiesDefaults(commandProperties)
                 .andThreadPoolPropertiesDefaults(threadPoolProperties));
         this.invoker = invoker;
         this.invocation = invocation;
-        this.hystrixConfig = hystrixConfig;
+        this.fallbackClass = config.getFallbackClass();
         this.method = method;
         //保存当前线程的rpc上下文
         this.rpcContext = RpcContext.getContext();
@@ -73,7 +73,6 @@ public class DubboHystrixCommand extends HystrixCommand<Result> {
         //把主线程的上下文copy过来
         BeanUtils.copyProperties(rpcContext, RpcContext.getContext());
         RpcResult result = new RpcResult();
-        String fallbackClass = hystrixConfig.fallbackClass();
         try {
             if (StringUtils.isNotBlank(fallbackClass)) {
                 Class<?> clz = Class.forName(fallbackClass);
