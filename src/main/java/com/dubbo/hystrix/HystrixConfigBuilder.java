@@ -91,7 +91,7 @@ public class HystrixConfigBuilder implements ApplicationContextAware {
         return env.getProperty(String.format(FORMAT, classSimpleName, methodName, name), type);
     }
 
-
+    @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.context = applicationContext;
     }
