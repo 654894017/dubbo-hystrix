@@ -31,7 +31,28 @@ public class HystrixConfigBuilder implements ApplicationContextAware {
     public HystrixCommandProperties.Setter buildCommandProperties() {
         HystrixProperties properties = context.getBean(HystrixProperties.class);
         HystrixCommandProperties.Setter setter = HystrixCommandProperties.Setter();
-        BeanUtils.copyProperties(properties, setter);
+        setter.withCircuitBreakerErrorThresholdPercentage(setter.getCircuitBreakerErrorThresholdPercentage())
+                .withCircuitBreakerErrorThresholdPercentage(setter.getCircuitBreakerErrorThresholdPercentage())
+                .withCircuitBreakerForceClosed(setter.getCircuitBreakerForceClosed())
+                .withCircuitBreakerForceOpen(setter.getCircuitBreakerForceOpen())
+                .withCircuitBreakerRequestVolumeThreshold(setter.getCircuitBreakerRequestVolumeThreshold())
+                .withCircuitBreakerSleepWindowInMilliseconds(setter.getCircuitBreakerSleepWindowInMilliseconds())
+                .withExecutionIsolationSemaphoreMaxConcurrentRequests(setter.getExecutionIsolationSemaphoreMaxConcurrentRequests())
+                .withExecutionIsolationThreadInterruptOnTimeout(setter.getExecutionIsolationThreadInterruptOnTimeout())
+                .withExecutionIsolationThreadInterruptOnFutureCancel(setter.getExecutionIsolationThreadInterruptOnFutureCancel())
+                .withExecutionTimeoutInMilliseconds(setter.getExecutionTimeoutInMilliseconds())
+                .withExecutionTimeoutEnabled(setter.getExecutionTimeoutEnabled())
+                .withFallbackIsolationSemaphoreMaxConcurrentRequests(setter.getFallbackIsolationSemaphoreMaxConcurrentRequests())
+                .withFallbackEnabled(setter.getFallbackEnabled())
+                .withMetricsHealthSnapshotIntervalInMilliseconds(setter.getMetricsHealthSnapshotIntervalInMilliseconds())
+                .withMetricsRollingPercentileBucketSize(setter.getMetricsRollingPercentileBucketSize())
+                .withMetricsRollingPercentileEnabled(setter.getMetricsRollingPercentileEnabled())
+                .withMetricsRollingPercentileWindowInMilliseconds(setter.getMetricsRollingPercentileWindowInMilliseconds())
+                .withMetricsRollingPercentileWindowBuckets(setter.getMetricsRollingPercentileWindowBuckets())
+                .withMetricsRollingStatisticalWindowInMilliseconds(setter.getMetricsRollingStatisticalWindowInMilliseconds())
+                .withMetricsRollingStatisticalWindowBuckets(setter.getMetricsRollingStatisticalWindowBuckets())
+                .withRequestCacheEnabled(setter.getRequestCacheEnabled())
+                .withRequestLogEnabled(setter.getRequestLogEnabled());
         return setter;
     }
 
@@ -96,7 +117,7 @@ public class HystrixConfigBuilder implements ApplicationContextAware {
         context = applicationContext;
     }
 
-    public static ApplicationContext getContext(){
+    public static ApplicationContext getContext() {
         return context;
     }
 }
