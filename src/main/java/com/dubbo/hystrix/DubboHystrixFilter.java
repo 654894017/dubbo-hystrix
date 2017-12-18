@@ -1,6 +1,5 @@
 package com.dubbo.hystrix;
 
-import com.alibaba.dubbo.config.spring.ServiceBean;
 import com.alibaba.dubbo.rpc.Filter;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Invoker;
@@ -33,7 +32,7 @@ public class DubboHystrixFilter implements Filter {
                 String methodName = invocation.getMethodName();
                 Class<?> interfaceCLz = invoker.getInterface();
                 Method method = interfaceCLz.getMethod(methodName, invocation.getParameterTypes());
-                HystrixConfigBuilder builder = ServiceBean.getSpringContext().getBean(HystrixConfigBuilder.class);
+                HystrixConfigBuilder builder = HystrixConfigBuilder.getContext().getBean(HystrixConfigBuilder.class);
                 if (builder != null) {
                     HystrixCommandProperties.Setter commandProperties = builder.buildCommandProperties();
                     HystrixThreadPoolProperties.Setter threadPoolProperties = builder.buildThreadPoolProperties(interfaceCLz.getSimpleName(), methodName);

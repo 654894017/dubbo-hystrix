@@ -1,6 +1,5 @@
 package com.dubbo.hystrix;
 
-import com.alibaba.dubbo.config.spring.ServiceBean;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Result;
@@ -17,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -83,9 +81,8 @@ public class DubboHystrixCommand extends HystrixCommand<Result> {
                             , invoker.getInterface().getName());
                     return result;
                 }
-                ApplicationContext context = ServiceBean.getSpringContext();
                 //优先获取spring中的对象
-                Object obj = context.getBean(clz);
+                Object obj = HystrixConfigBuilder.getContext().getBean(clz);
                 if (obj == null) {
                     obj = clz.newInstance();
                 }

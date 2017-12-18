@@ -26,7 +26,7 @@ public class HystrixConfigBuilder implements ApplicationContextAware {
     private static final String ALLOW_MAXIMUM_SIZE_TO_DIVERGE_FROM_CORE_SIZE = "allowMaximumSizeToDivergeFromCoreSize";
     private static final String FALLBACK_CLASS = "fallbackClass";
 
-    private ApplicationContext context;
+    private static ApplicationContext context;
 
     public HystrixCommandProperties.Setter buildCommandProperties() {
         HystrixProperties properties = context.getBean(HystrixProperties.class);
@@ -93,6 +93,10 @@ public class HystrixConfigBuilder implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
+        context = applicationContext;
+    }
+
+    public static ApplicationContext getContext(){
+        return context;
     }
 }
