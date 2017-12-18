@@ -31,28 +31,75 @@ public class HystrixConfigBuilder implements ApplicationContextAware {
     public HystrixCommandProperties.Setter buildCommandProperties() {
         HystrixProperties properties = context.getBean(HystrixProperties.class);
         HystrixCommandProperties.Setter setter = HystrixCommandProperties.Setter();
-        setter.withCircuitBreakerErrorThresholdPercentage(setter.getCircuitBreakerErrorThresholdPercentage())
-                .withCircuitBreakerErrorThresholdPercentage(setter.getCircuitBreakerErrorThresholdPercentage())
-                .withCircuitBreakerForceClosed(setter.getCircuitBreakerForceClosed())
-                .withCircuitBreakerForceOpen(setter.getCircuitBreakerForceOpen())
-                .withCircuitBreakerRequestVolumeThreshold(setter.getCircuitBreakerRequestVolumeThreshold())
-                .withCircuitBreakerSleepWindowInMilliseconds(setter.getCircuitBreakerSleepWindowInMilliseconds())
-                .withExecutionIsolationSemaphoreMaxConcurrentRequests(setter.getExecutionIsolationSemaphoreMaxConcurrentRequests())
-                .withExecutionIsolationThreadInterruptOnTimeout(setter.getExecutionIsolationThreadInterruptOnTimeout())
-                .withExecutionIsolationThreadInterruptOnFutureCancel(setter.getExecutionIsolationThreadInterruptOnFutureCancel())
-                .withExecutionTimeoutInMilliseconds(setter.getExecutionTimeoutInMilliseconds())
-                .withExecutionTimeoutEnabled(setter.getExecutionTimeoutEnabled())
-                .withFallbackIsolationSemaphoreMaxConcurrentRequests(setter.getFallbackIsolationSemaphoreMaxConcurrentRequests())
-                .withFallbackEnabled(setter.getFallbackEnabled())
-                .withMetricsHealthSnapshotIntervalInMilliseconds(setter.getMetricsHealthSnapshotIntervalInMilliseconds())
-                .withMetricsRollingPercentileBucketSize(setter.getMetricsRollingPercentileBucketSize())
-                .withMetricsRollingPercentileEnabled(setter.getMetricsRollingPercentileEnabled())
-                .withMetricsRollingPercentileWindowInMilliseconds(setter.getMetricsRollingPercentileWindowInMilliseconds())
-                .withMetricsRollingPercentileWindowBuckets(setter.getMetricsRollingPercentileWindowBuckets())
-                .withMetricsRollingStatisticalWindowInMilliseconds(setter.getMetricsRollingStatisticalWindowInMilliseconds())
-                .withMetricsRollingStatisticalWindowBuckets(setter.getMetricsRollingStatisticalWindowBuckets())
-                .withRequestCacheEnabled(setter.getRequestCacheEnabled())
-                .withRequestLogEnabled(setter.getRequestLogEnabled());
+        if (properties.getCircuitBreakerEnabled() != null) {
+            setter.withCircuitBreakerEnabled(properties.getCircuitBreakerEnabled());
+        }
+        if (properties.getCircuitBreakerErrorThresholdPercentage() != null) {
+            setter.withCircuitBreakerErrorThresholdPercentage(properties.getCircuitBreakerErrorThresholdPercentage());
+        }
+        if (properties.getCircuitBreakerForceClosed() != null) {
+            setter.withCircuitBreakerForceClosed(properties.getCircuitBreakerForceClosed());
+        }
+        if (properties.getCircuitBreakerForceOpen() != null) {
+            setter.withCircuitBreakerForceOpen(properties.getCircuitBreakerForceOpen());
+        }
+        if (properties.getRequestCacheEnabled() != null) {
+            setter.withRequestCacheEnabled(properties.getRequestCacheEnabled());
+        }
+        if (properties.getMetricsRollingStatisticalWindowBuckets() != null) {
+            setter.withMetricsRollingStatisticalWindowBuckets(properties.getMetricsRollingStatisticalWindowBuckets());
+        }
+        if (properties.getMetricsRollingStatisticalWindowInMilliseconds() != null) {
+            setter.withMetricsRollingStatisticalWindowInMilliseconds(properties.getMetricsRollingStatisticalWindowInMilliseconds());
+        }
+        if (properties.getMetricsRollingPercentileWindowBuckets() != null) {
+            setter.withMetricsRollingPercentileWindowBuckets(properties.getMetricsRollingPercentileWindowBuckets());
+        }
+        if (properties.getMetricsRollingPercentileWindowBuckets() != null) {
+            setter.withMetricsRollingPercentileWindowBuckets(properties.getMetricsRollingPercentileWindowBuckets());
+        }
+        if (properties.getMetricsRollingPercentileWindowInMilliseconds() != null) {
+            setter.withMetricsRollingPercentileWindowInMilliseconds(properties.getMetricsRollingPercentileWindowInMilliseconds());
+        }
+        if (properties.getMetricsRollingPercentileEnabled() != null) {
+            setter.withMetricsRollingPercentileEnabled(properties.getMetricsRollingPercentileEnabled());
+        }
+        if (properties.getMetricsRollingPercentileBucketSize() != null) {
+            setter.withMetricsRollingPercentileBucketSize(properties.getMetricsRollingPercentileBucketSize());
+        }
+        if (properties.getMetricsHealthSnapshotIntervalInMilliseconds() != null) {
+            setter.withMetricsHealthSnapshotIntervalInMilliseconds(properties.getMetricsHealthSnapshotIntervalInMilliseconds());
+        }
+        if (properties.getFallbackEnabled() != null) {
+            setter.withFallbackEnabled(properties.getFallbackEnabled());
+        }
+        if (properties.getFallbackIsolationSemaphoreMaxConcurrentRequests() != null) {
+            setter.withFallbackIsolationSemaphoreMaxConcurrentRequests(properties.getFallbackIsolationSemaphoreMaxConcurrentRequests());
+        }
+        if (properties.getExecutionTimeoutEnabled() != null) {
+            setter.withExecutionTimeoutEnabled(properties.getExecutionTimeoutEnabled());
+        }
+        if (properties.getExecutionTimeoutInMilliseconds() != null) {
+            setter.withExecutionTimeoutInMilliseconds(properties.getExecutionTimeoutInMilliseconds());
+        }
+        if (properties.getExecutionIsolationThreadInterruptOnFutureCancel() != null) {
+            setter.withExecutionIsolationThreadInterruptOnFutureCancel(properties.getExecutionIsolationThreadInterruptOnFutureCancel());
+        }
+        if (properties.getExecutionIsolationThreadInterruptOnTimeout() != null) {
+            setter.withExecutionIsolationThreadInterruptOnTimeout(properties.getExecutionIsolationThreadInterruptOnTimeout());
+        }
+        if (properties.getExecutionIsolationSemaphoreMaxConcurrentRequests() != null) {
+            setter.withExecutionIsolationSemaphoreMaxConcurrentRequests(properties.getExecutionIsolationSemaphoreMaxConcurrentRequests());
+        }
+        if (properties.getCircuitBreakerSleepWindowInMilliseconds() != null) {
+            setter.withCircuitBreakerSleepWindowInMilliseconds(properties.getCircuitBreakerSleepWindowInMilliseconds());
+        }
+        if (properties.getCircuitBreakerRequestVolumeThreshold() != null) {
+            setter.withCircuitBreakerRequestVolumeThreshold(properties.getCircuitBreakerRequestVolumeThreshold());
+        }
+        if (properties.getRequestLogEnabled() != null) {
+            setter.withRequestLogEnabled(properties.getRequestLogEnabled());
+        }
         return setter;
     }
 
