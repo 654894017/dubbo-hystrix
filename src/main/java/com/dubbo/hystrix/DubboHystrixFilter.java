@@ -34,8 +34,8 @@ public class DubboHystrixFilter implements Filter {
                 Method method = interfaceCLz.getMethod(methodName, invocation.getParameterTypes());
                 HystrixConfigBuilder builder = HystrixConfigBuilder.getContext().getBean(HystrixConfigBuilder.class);
                 if (builder != null) {
-                    HystrixCommandProperties.Setter commandProperties = builder.buildCommandProperties();
-                    HystrixThreadPoolProperties.Setter threadPoolProperties = builder.buildThreadPoolProperties(interfaceCLz.getSimpleName(), methodName);
+                    HystrixCommandProperties.Setter commandProperties = builder.buildHystrixCommandProperties(interfaceCLz.getSimpleName(), methodName);
+                    HystrixThreadPoolProperties.Setter threadPoolProperties = builder.buildHystrixThreadPoolProperties(interfaceCLz.getSimpleName(), methodName);
                     HystrixMethodConfig config = builder.buildHystrixMethodConfig(interfaceCLz.getSimpleName(), methodName);
                     DubboHystrixCommand command = new DubboHystrixCommand(invoker, invocation, method, commandProperties, threadPoolProperties, config);
                     Result result = command.execute();

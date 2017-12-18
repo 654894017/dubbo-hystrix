@@ -1,7 +1,6 @@
 package com.dubbo.hystrix;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @create 2017-12-18 上午10:29
  */
 @Configuration
-@EnableConfigurationProperties(HystrixProperties.class)
 @ConditionalOnClass(HystrixConfigBuilder.class)
 public class DubboHystrixAutoConfiguration {
     @Bean
