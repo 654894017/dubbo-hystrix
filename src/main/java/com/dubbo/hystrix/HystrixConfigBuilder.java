@@ -40,6 +40,14 @@ public class HystrixConfigBuilder implements ApplicationContextAware {
         if (circuitBreakerRequestVolumeThreshold != null) {
             setter.withCircuitBreakerRequestVolumeThreshold(circuitBreakerRequestVolumeThreshold);
         }
+        Boolean fallbackEnabled = getProperty(classSimpleName, methodName, "fallbackEnabled", Boolean.class);
+        if (fallbackEnabled != null) {
+            setter.withFallbackEnabled(fallbackEnabled);
+        }
+        Boolean circuitBreakerEnabled = getProperty(classSimpleName, methodName, "circuitBreakerEnabled", Boolean.class);
+        if (circuitBreakerEnabled != null) {
+            setter.withCircuitBreakerEnabled(circuitBreakerEnabled);
+        }
         return setter;
     }
 
