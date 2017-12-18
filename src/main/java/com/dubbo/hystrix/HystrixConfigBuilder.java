@@ -19,14 +19,10 @@ public class HystrixConfigBuilder implements ApplicationContextAware {
     private static ApplicationContext context;
 
     public HystrixCommandProperties.Setter buildHystrixCommandProperties(String classSimpleName, String methodName) {
-        HystrixCommandProperties.Setter setter = HystrixCommandProperties.Setter();
+        HystrixCommandProperties.Setter setter = HystrixCommandProperties.Setter().withExecutionTimeoutEnabled(false);
         Integer circuitBreakerErrorThresholdPercentage = getProperty(classSimpleName, methodName, "circuitBreakerErrorThresholdPercentage", Integer.class);
         if (circuitBreakerErrorThresholdPercentage != null) {
             setter.withCircuitBreakerErrorThresholdPercentage(circuitBreakerErrorThresholdPercentage);
-        }
-        Boolean executionTimeoutEnabled = getProperty(classSimpleName, methodName, "executionTimeoutEnabled", Boolean.class);
-        if (executionTimeoutEnabled != null) {
-            setter.withExecutionTimeoutEnabled(executionTimeoutEnabled);
         }
         Integer executionTimeoutInMilliseconds = getProperty(classSimpleName, methodName, "executionTimeoutInMilliseconds", Integer.class);
         if (executionTimeoutInMilliseconds != null) {
