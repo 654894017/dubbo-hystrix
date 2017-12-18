@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface HystrixMethodConfig {
-    String groupKey() default "";
+    String groupKey() default "default";
 
-    String commandKey() default "";
+    String commandKey() default "default";
 
     String fallbackClass() default "";
 
