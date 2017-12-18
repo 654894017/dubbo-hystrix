@@ -77,7 +77,7 @@ public class HystrixConfigBuilder implements ApplicationContextAware {
         HystrixMethodConfig methodConfig = new HystrixMethodConfig();
         methodConfig.setGroupKey(classSimpleName);
         methodConfig.setCommandKey(methodName);
-        methodConfig.setFallbackClass(getProperty(classSimpleName, methodName, "fallbackClass", String.class));
+        methodConfig.setFallbackClass(getProperty(classSimpleName, "default", "fallbackClass", String.class));
         return methodConfig;
     }
 
