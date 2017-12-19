@@ -81,14 +81,7 @@ public abstract class AbstractHystrixConfigBuilder implements ApplicationContext
         return setter;
     }
 
-    public HystrixMethodConfig buildHystrixMethodConfig(String classSimpleName, String methodName) {
-        HystrixMethodConfig methodConfig = new HystrixMethodConfig();
-        methodConfig.setGroupKey(classSimpleName);
-        methodConfig.setCommandKey(String.format("%s-%s", classSimpleName, methodName));
-        methodConfig.setFallbackClass(getProperty(classSimpleName, "default", "fallbackClass", String.class));
-        return methodConfig;
-    }
-
+    public abstract HystrixMethodConfig buildHystrixMethodConfig(String classSimpleName, String methodName);
 
     protected abstract <T> T getProperty(String classSimpleName, String methodName, String name, Class<T> type);
 

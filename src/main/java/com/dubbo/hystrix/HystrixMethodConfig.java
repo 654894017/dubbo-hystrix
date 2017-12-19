@@ -14,6 +14,8 @@ public class HystrixMethodConfig {
 
     private String commandKey;
 
+    private String threadKey;
+
     private String fallbackClass;
 
 }

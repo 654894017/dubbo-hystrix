@@ -10,6 +10,7 @@ import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.HystrixCommandProperties;
+import com.netflix.hystrix.HystrixThreadPoolKey;
 import com.netflix.hystrix.HystrixThreadPoolProperties;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +40,7 @@ public class DubboHystrixCommand extends HystrixCommand<Result> {
     DubboHystrixCommand(Invoker invoker, Invocation invocation, Method method, HystrixCommandProperties.Setter commandProperties, HystrixThreadPoolProperties.Setter threadPoolProperties, HystrixMethodConfig config) {
         super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(config.getGroupKey()))
                 .andCommandKey(HystrixCommandKey.Factory.asKey(config.getCommandKey()))
+                .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey(config.getThreadKey()))
                 .andCommandPropertiesDefaults(commandProperties)
                 .andThreadPoolPropertiesDefaults(threadPoolProperties));
         this.invoker = invoker;
