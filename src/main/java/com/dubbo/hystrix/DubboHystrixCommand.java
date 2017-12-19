@@ -63,6 +63,7 @@ public class DubboHystrixCommand extends HystrixCommand<Result> {
         } finally {
             //拿到dubbo执行完的最新的上下文
             BeanUtils.copyProperties(RpcContext.getContext(), rpcContext);
+            RpcContext.removeContext();
         }
     }
 
@@ -82,7 +83,7 @@ public class DubboHystrixCommand extends HystrixCommand<Result> {
                     return result;
                 }
                 //优先获取spring中的对象
-                Object obj = HystrixConfigBuilder.getContext().getBean(clz);
+                Object obj = AbstractHystrixConfigBuilder.getContext().getBean(clz);
                 if (obj == null) {
                     obj = clz.newInstance();
                 }
@@ -101,6 +102,7 @@ public class DubboHystrixCommand extends HystrixCommand<Result> {
         } finally {
             //拿到执行完的最新的上下文
             BeanUtils.copyProperties(RpcContext.getContext(), rpcContext);
+            RpcContext.removeContext();
         }
         return result;
     }

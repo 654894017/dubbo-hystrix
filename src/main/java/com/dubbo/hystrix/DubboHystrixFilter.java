@@ -10,7 +10,6 @@ import com.netflix.hystrix.HystrixCommandProperties;
 import com.netflix.hystrix.HystrixThreadPoolProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -38,10 +37,7 @@ public class DubboHystrixFilter implements Filter {
                     HystrixThreadPoolProperties.Setter threadPoolProperties = builder.buildHystrixThreadPoolProperties(interfaceCLz.getSimpleName(), methodName);
                     HystrixMethodConfig config = builder.buildHystrixMethodConfig(interfaceCLz.getSimpleName(), methodName);
                     DubboHystrixCommand command = new DubboHystrixCommand(invoker, invocation, method, commandProperties, threadPoolProperties, config);
-                    Result result = command.execute();
-                    //把执行完的rpc上下文copy出来,放到调用线程的threadLocal中
-                    BeanUtils.copyProperties(command.getRpcContext(), RpcContext.getContext());
-                    return result;
+                    return command.execute();
                 }
             }
         } catch (NoSuchMethodException e) {
