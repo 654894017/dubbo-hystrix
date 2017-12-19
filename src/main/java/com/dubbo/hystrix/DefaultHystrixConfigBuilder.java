@@ -12,7 +12,7 @@ public class DefaultHystrixConfigBuilder extends AbstractHystrixConfigBuilder {
         HystrixMethodConfig methodConfig = new HystrixMethodConfig();
         methodConfig.setGroupKey(classSimpleName);
         methodConfig.setCommandKey(String.format("%s-%s", classSimpleName, methodName));
-        methodConfig.setThreadKey(classSimpleName);
+        methodConfig.setThreadKey(String.format("%s-%s", classSimpleName, methodName));
         methodConfig.setFallbackClass(getProperty(classSimpleName, "default", "fallbackClass", String.class));
         return methodConfig;
     }
